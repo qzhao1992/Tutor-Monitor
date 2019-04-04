@@ -1,0 +1,52 @@
+<div class="container">
+    <div class="card">
+        <!-- <div>
+            <div *ngIf="!items">
+                There is no item in the store, please add one
+                <button type="button" class="btn btn-success" (click)="openAddModal()">Add</button>
+            </div>
+            <div *ngIf="items">
+                <button type="button" class="btn btn-success" (click)="openAddModal()">Add</button>
+            </div>
+        </div> -->
+        <div class="card-header">
+                <div class="row">
+                        <div class="col-10 justify-content-center align-self-center">
+                                    <h2>Users</h2>
+                        </div>
+                        <div class="col">
+                            <button class="btn"><span style="font-size: 30px;"><i class="far fa-plus-square"></i></span></button>
+                        </div>
+                </div>
+            <!-- Users -->
+        </div>
+
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">Name</th>
+                    <th scope="col">Price</th>
+                    <th scope="col">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let item of items; index as i">
+                    <td>
+                        {{ item.name }}
+                    </td>
+                    <td>{{ item.price  | currency}}</td>
+                    <td>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <button type="button" class="btn btn-primary" (click)="openEdit(item)">Edit</button>
+                            </div>
+                            <div class="col-md-4">
+                                <button type="button" class="btn btn-danger" (click)="deleteItem(item)">Delete</button>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
