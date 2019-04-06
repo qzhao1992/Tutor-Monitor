@@ -6,6 +6,7 @@ import { FormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { UsersComponent } from './users/users.component';
+import { AuthComponent } from './auth/auth.component';
 
 //modal
 import { EditItemModalContent } from './users/editUser.component';
@@ -27,6 +28,7 @@ import {NgbPaginationModule, NgbAlertModule} from '@ng-bootstrap/ng-bootstrap';
   declarations: [
     AppComponent,
     UsersComponent,
+    AuthComponent,
     EditItemModalContent,
     AddItemModalContent
   ],
