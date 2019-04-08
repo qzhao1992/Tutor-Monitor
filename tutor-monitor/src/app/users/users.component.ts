@@ -63,10 +63,10 @@ export class UsersComponent {
     // modalRef.componentInstance.item = item;  
   }
 
-  openEdit(item) {
-    console.log("edit", item);
+  openEdit(user) {
+    console.log("edit", user);
     const modalRef = this.modalService.open(EditUserModalContent);
-    modalRef.componentInstance.item = item;
+    modalRef.componentInstance.user = user;
   }
 
   deleteItem(item){
