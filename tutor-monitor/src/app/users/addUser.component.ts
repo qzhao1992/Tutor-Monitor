@@ -9,22 +9,22 @@ import {FormsModule} from '@angular/forms'
     templateUrl: 'addUser.html',
   })
 
-export class AddItemModalContent {
-    itemRef: any;
-    item: any = {};
+export class AddUserModalContent {
+    usersRef: any;
+    user: any = {};
 
     constructor(
         public activeModal: NgbActiveModal,
-        db: AngularFireDatabase
+        db: AngularFirestore
         ) {
-            this.itemRef = db.list('items');
+            this.usersRef = db.collection('users');
         }
 
 
-    add(item){
-        console.log('modal', item)
-        item.price = parseFloat(item.price)
-        this.itemRef.push(item).then((item) =>{
+    add(user){
+        console.log('modal', user)
+        
+        this.usersRef.add(user).then((item) =>{
             this.activeModal.close('Saved')
         })
     }

@@ -1,5 +1,5 @@
 <div class="modal-header">
-    <h4 class="modal-title">Add Item</h4>
+    <h4 class="modal-title">Add User</h4>
     <button type="button" class="close" (click)="activeModal.dismiss('Cross click')">
         <span aria-hidden="true">&times;</span>
     </button>
@@ -7,16 +7,24 @@
 <div class="modal-body">
     <form>
         <div class="form-group">
-            <label for="name">Name</label>
-            <input class="form-control" name="name" id="name" [(ngModel)]="item.name">
+            <label for="firstName">First Name</label>
+            <input class="form-control" name="firstName" id="firstName" [(ngModel)]="user.firstName">
         </div>
         <div class="form-group">
-            <label for="price">Price</label>
-            <input  class="form-control" name="price" id="price" [(ngModel)]="item.price">
+            <label for="lastName">Last Name</label>
+            <input class="form-control" name="lastName" id="lastName" [(ngModel)]="user.lastName">
+        </div>
+        <div class="form-group">
+            <label for="email">Email</label>
+            <input class="form-control" type="email" name="email" id="email" [(ngModel)]="user.email">
+        </div>
+        <div class="form-group">
+            <label for="role">Role</label>
+            <input class="form-control" name="role" id="role" [(ngModel)]="user.role">
         </div>
     </form>
 </div>
 <div class="modal-footer">
-    <button type="button" class="btn btn-outline-dark" (click)="add(item)" ngbAutofocus>Add</button>
+    <button type="button" class="btn btn-outline-dark" (click)="add(user)" ngbAutofocus>Add</button>
     <button type="button" class="btn btn-outline-dark" (click)="activeModal.close('Close click')">Close</button>
 </div>

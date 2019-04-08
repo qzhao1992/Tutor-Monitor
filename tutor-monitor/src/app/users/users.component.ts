@@ -9,8 +9,8 @@ import { AngularFireDatabase } from '@angular/fire/database';
 import { map } from 'rxjs/operators';
 
 //modal
-import { EditItemModalContent } from './editUser.component';
-import { AddItemModalContent } from './addUser.component';
+import { EditUserModalContent } from './editUser.component';
+import { AddUserModalContent } from './addUser.component';
 
 
 @Component({
@@ -18,54 +18,54 @@ import { AddItemModalContent } from './addUser.component';
   templateUrl: 'users.component.html',
 })
 export class UsersComponent {
-  items: any = [];
+  users: any = [];
   closeResult: string;
   db : any;
 
   constructor(
-    firebase: AngularFireDatabase,
+    firebase: AngularFirestore,
 
     private modalService: NgbModal
   ) {
     this.db = firebase;
+    this.users = this.db.collection('users').snapshotChanges().pipe(map((users:any) => users.map(a =>{
+      let data = a.payload.doc.data();
+      data["id"] =a.payload.doc.id;
+      return data;
+    }))).subscribe((users) =>{
 
-    firebase.list('items').snapshotChanges().pipe(map(items => {
-      return items.map(item => {
-        let data = item.payload.val();
-        data["_key"] = item.payload.key
-        return data
-      })
-    }))
-      .subscribe((items) => {
-        if (items) {
-          this.items = items
-        }
-      })
+      //testing
+      console.log("subscribe users: ",users);
 
-    // this.items.subscribe((items) =>{
-    //     if(items){
-    //       this.items = items
-    //       console.log("key", this.items)
+      this.users = users;
+    });
+
+    
+
+
+
+    // firebase.list('users').snapshotChanges().pipe(map(users => {
+    //   return users.map(user => {
+    //     let data = user.payload.val();
+    //     data["_key"] = user.payload.key
+    //     return data
+    //   })
+    // }))
+    //   .subscribe((users) => {
+    //     if (users) {
+    //       this.users = users
     //     }
-
-    // console.log("items", this.items);
-    // // subscribe((items) =>{
-    // //   console.log(items)
-    // //   if(items){
-    // //     this.items = items
-    // //     console.log("key", this.items)
-    // //   }
-    // } )
+    //   })
   }
 
   openAddModal() {
-    const modalRef = this.modalService.open(AddItemModalContent);
+    const modalRef = this.modalService.open(AddUserModalContent);
     // modalRef.componentInstance.item = item;  
   }
 
   openEdit(item) {
     console.log("edit", item);
-    const modalRef = this.modalService.open(EditItemModalContent);
+    const modalRef = this.modalService.open(EditUserModalContent);
     modalRef.componentInstance.item = item;
   }
 
