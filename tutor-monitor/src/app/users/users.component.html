@@ -1,40 +1,50 @@
 <div class="container">
     <div class="card">
-        <!-- <div>
-            <div *ngIf="!items">
-                There is no item in the store, please add one
-                <button type="button" class="btn btn-success" (click)="openAddModal()">Add</button>
-            </div>
-            <div *ngIf="items">
-                <button type="button" class="btn btn-success" (click)="openAddModal()">Add</button>
-            </div>
-        </div> -->
+        
         <div class="card-header">
                 <div class="row">
                         <div class="col-10 justify-content-center align-self-center">
                                     <h2>Users</h2>
                         </div>
                         <div class="col">
-                            <button class="btn"><span style="font-size: 30px;"><i class="far fa-plus-square"></i></span></button>
+                            <button class="btn" (click)="openAddModal()"><span style="font-size: 30px;"><i class="far fa-plus-square"></i></span></button>
                         </div>
                 </div>
             <!-- Users -->
         </div>
 
-        <table class="table table-striped">
+        <div *ngIf="!users">
+            <div >
+                There is no item in the store, please add one
+                <a (click)="openAddModal()" href="javascript:void(0)">Add</a>
+                <!-- <button type="button" class="btn btn-success" (click)="openAddModal()">Add</button> -->
+            </div>
+        </div>
+
+        <table *ngIf="users.length > 0" class="table table-striped">
             <thead>
                 <tr>
-                    <th scope="col">Name</th>
-                    <th scope="col">Price</th>
+                    <th scope="col">First Name</th>
+                    <th scope="col">Last Name</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Role</th>
                     <th scope="col">Actions</th>
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let item of items; index as i">
+                <tr *ngFor="let user of users">
                     <td>
-                        {{ item.name }}
+                        {{ user.firstName }}
                     </td>
-                    <td>{{ item.price  | currency}}</td>
+                    <td>
+                        {{ user.lastName }}
+                    </td>
+                    <td>
+                        {{ user.email }}
+                    </td>
+                    <td>
+                        {{ user.role }}
+                    </td>
                     <td>
                         <div class="row">
                             <div class="col-md-4">

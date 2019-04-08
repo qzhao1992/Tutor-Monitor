@@ -13,7 +13,7 @@ import * as _ from 'lodash';
     templateUrl: 'editUser.html',
   })
 
-export class EditItemModalContent {
+export class EditUserModalContent {
     @Input() item;
     itemRef: any;
     db : any;
