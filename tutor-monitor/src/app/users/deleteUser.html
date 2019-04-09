@@ -1,0 +1,13 @@
+<div class="modal-header">
+    <h4 class="modal-title">Add User</h4>
+    <button type="button" class="close" (click)="activeModal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<div class="modal-body">
+   <h4>Are you sure that you want to permanently delete the selected user?</h4>
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="delete()" ngbAutofocus>Delete</button>
+    <button type="button" class="btn btn-outline-dark" (click)="activeModal.close('Close click')">Close</button>
+</div>

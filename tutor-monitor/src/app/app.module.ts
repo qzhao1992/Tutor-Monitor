@@ -10,6 +10,7 @@ import { AuthComponent } from './auth/auth.component';
 
 //modal
 import { EditUserModalContent } from './users/editUser.component';
+import { DeleteUserModalContent } from './users/deleteUser.component';
 import { AddUserModalContent } from './users/addUser.component';
 
 
@@ -30,7 +31,8 @@ import {NgbPaginationModule, NgbAlertModule} from '@ng-bootstrap/ng-bootstrap';
     UsersComponent,
     AuthComponent,
     EditUserModalContent,
-    AddUserModalContent
+    AddUserModalContent,
+    DeleteUserModalContent
   ],
   imports: [
     BrowserModule,
@@ -47,7 +49,8 @@ import {NgbPaginationModule, NgbAlertModule} from '@ng-bootstrap/ng-bootstrap';
   ],
   entryComponents: [
     EditUserModalContent,
-    AddUserModalContent
+    AddUserModalContent,
+    DeleteUserModalContent
   ],
   providers: [],
   bootstrap: [
