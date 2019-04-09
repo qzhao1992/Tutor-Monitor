@@ -24,7 +24,7 @@ export class AddUserModalContent {
     add(user){
         console.log('modal', user)
         
-        this.usersRef.add(user).then((item) =>{
+        this.usersRef.add(user).then((user) =>{
             this.activeModal.close('Saved')
         })
     }
