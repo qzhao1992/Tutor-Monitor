@@ -13,14 +13,14 @@ import * as _ from 'lodash';
     templateUrl: 'editUser.html',
   })
 
-export class EditItemModalContent {
-    @Input() item;
-    itemRef: any;
+export class EditUserModalContent {
+    @Input() user;
+    userRef: any;
     db : any;
-    newItem: any = {}
+    newUser: any = {}
     
     
-    itemsRef: AngularFirestoreCollection;
+    usersRef: AngularFirestoreCollection;
     private itemDoc: AngularFirestoreDocument;
 
     constructor(
@@ -32,17 +32,17 @@ export class EditItemModalContent {
         }
 
     ngOnInit() {
-        this.newItem = _.cloneDeep(this.item);
-        // console.log("new item", this.item);
+        this.newUser = _.cloneDeep(this.user);
+        console.log("new User", this.user);
     }
 
 
-    update(item){
-        this.itemRef = this.db.object('items/' + item._key);
-        item.price = parseFloat(item.price)
-        this.itemRef.update(item).then((item) =>{
-            this.activeModal.close('Saved')
-        })
+    update(user){
+        this.userRef = this.db.object('users/' + user._key);
+        // user.price = parseFloat(item.price)
+        // this.userRef.update(item).then((item) =>{
+        //     this.activeModal.close('Saved')
+        // })
     }
 
     

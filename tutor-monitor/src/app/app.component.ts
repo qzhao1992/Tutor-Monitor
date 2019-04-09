@@ -12,7 +12,6 @@ export class AppComponent implements OnInit {
   title = 'admin';
   items: Observable<any[]>;
   constructor(db: AngularFirestore, private afAuth: AngularFireAuth) {
-    this.items = db.collection('items').valueChanges();
   }
 
   ngOnInit() {

@@ -11,16 +11,11 @@ import { AppComponent } from './app.component';
 import { UsersComponent } from './users/users.component';
 import { CalendarComponent } from './calendar/calendar.component';
 import { AuthService } from "./shared/services/auth.service";
-
-
-
-
-
-
+import { AuthComponent } from './auth/auth.component';
 
 //modal
-import { EditItemModalContent } from './users/editUser.component';
-import { AddItemModalContent } from './users/addUser.component';
+import { EditUserModalContent } from './users/editUser.component';
+import { AddUserModalContent } from './users/addUser.component';
 
 
 
@@ -46,15 +41,14 @@ import { NgbPaginationModule, NgbAlertModule } from '@ng-bootstrap/ng-bootstrap'
     AppComponent,
     UsersComponent,
     CalendarComponent,
-    EditItemModalContent,
-    AddItemModalContent,
     SignInComponent,
     SignUpComponent,
     DashboardComponent,
     ForgotPasswordComponent,
-    VerifyEmailComponent
-
-
+    VerifyEmailComponent,
+    AuthComponent,
+    EditUserModalContent,
+    AddUserModalContent
   ],
   imports: [
     BrowserModule,
@@ -76,8 +70,8 @@ import { NgbPaginationModule, NgbAlertModule } from '@ng-bootstrap/ng-bootstrap'
     })
   ],
   entryComponents: [
-    EditItemModalContent,
-    AddItemModalContent
+    EditUserModalContent,
+    AddUserModalContent
   ],
   providers: [],
   bootstrap: [
