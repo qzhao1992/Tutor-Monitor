@@ -11,6 +11,8 @@ import * as _ from 'lodash';
 
 export class EditUserModalContent {
     @Input() user;
+    isAddStart: boolean = false;
+    isAddEnd: boolean = false;
     userRef: any;
     db : any;
     newUser: any = {}
@@ -36,6 +38,19 @@ export class EditUserModalContent {
         this.userDoc = this.db.doc('users/' + user.id).update(user).then((data)=>{
                 this.activeModal.close('Saved')
         })
+    }
+
+    addStartSchedule(){
+        this.isAddStart = true;
+    }
+
+    addEndSchedule(){
+        this.isAddEnd = true;
+    }
+
+    finishedAddSchedule(){
+        this.isAddStart = false;
+        this.isAddEnd = false;
     }
 
     
