@@ -5,6 +5,8 @@ import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CalendarModule, DateAdapter } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
+import { DlDateTimeDateModule, DlDateTimePickerModule } from 'angular-bootstrap-datetimepicker';
+
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -65,6 +67,8 @@ import { NgbPaginationModule, NgbAlertModule } from '@ng-bootstrap/ng-bootstrap'
     AngularFireAuthModule, // imports firebase/auth, only needed for auth features,
     AngularFireStorageModule,
     AngularFireDatabaseModule,
+    DlDateTimeDateModule,
+    DlDateTimePickerModule,
     NgbModule,
     NgbPaginationModule,
     NgbAlertModule,
