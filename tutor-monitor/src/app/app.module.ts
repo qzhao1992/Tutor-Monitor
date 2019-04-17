@@ -34,6 +34,8 @@ import { SignUpComponent } from './components/sign-up/sign-up.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { ForgotPasswordComponent } from './components/forgot-password/forgot-password.component';
 import { VerifyEmailComponent } from './components/verify-email/verify-email.component';
+import { TutorUserComponent } from './users/tutorUser.component';
+import { ToggleButtonComponent } from './users/toggle-button.component';
 
 
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -53,6 +55,8 @@ import { NgbPaginationModule, NgbAlertModule } from '@ng-bootstrap/ng-bootstrap'
     AuthComponent,
     EditUserModalContent,
     AddUserModalContent,
+    TutorUserComponent,
+    ToggleButtonComponent,
     DeleteUserModalContent
   ],
   imports: [
@@ -69,6 +73,7 @@ import { NgbPaginationModule, NgbAlertModule } from '@ng-bootstrap/ng-bootstrap'
     NgbPaginationModule,
     NgbAlertModule,
     FormsModule,
+
     BrowserAnimationsModule,
     CalendarModule.forRoot({
       provide: DateAdapter,
@@ -84,6 +89,7 @@ import { NgbPaginationModule, NgbAlertModule } from '@ng-bootstrap/ng-bootstrap'
   providers: [],
   bootstrap: [
     AppComponent,
+
     // ItemsComponent
   ]
 })

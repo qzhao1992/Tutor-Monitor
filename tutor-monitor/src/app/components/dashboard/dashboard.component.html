@@ -21,7 +21,10 @@
                     <li class="nav-item">
                         <a class="nav-link" (click)="authService.SignOut()">
                             <i class="fas fa-sign-out-alt"></i>Log out
+
                         </a>
+
+
                     </li>
                 </ul>
             </div>
@@ -35,6 +38,7 @@
                     <h1 class="h2">User Profile</h1>
                 </div>
                 <!-- Show user data when logged in -->
+
                 <div class="row" *ngIf="authService.userData as user">
                     <div class="col-md-12">
                         <div class="media">
@@ -45,6 +49,14 @@
                                 <p>User ID: <strong>{{user.uid}}</strong></p>
                                 <p>Email: <strong>{{user.email}}</strong></p>
                                 <p>Email Verified: <strong>{{user.emailVerified}}</strong></p>
+                                <a href="/users" class="btn btn-secondary btn-lg active" role="button" aria-pressed="true">admin
+                                    data</a>
+                                <a href="/tutorpage" class="btn btn-secondary btn-lg active" role="button" aria-pressed="true">tutor
+                                    page
+                                </a>
+
+
+
                             </div>
                         </div>
                     </div>
@@ -52,6 +64,8 @@
 
             </div>
         </main>
+
+
 
     </div>
 </div>
