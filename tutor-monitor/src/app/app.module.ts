@@ -9,12 +9,14 @@ import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { UsersComponent } from './users/users.component';
-import { CalendarComponent } from './calendar/calendar.component';
+// import { CalendarComponent } from './users/calendar.component';
+import { CalendarComponent } from './users/calendar.component';
 import { AuthService } from "./shared/services/auth.service";
 import { AuthComponent } from './auth/auth.component';
 
 //modal
 import { EditUserModalContent } from './users/editUser.component';
+import { DeleteUserModalContent } from './users/deleteUser.component';
 import { AddUserModalContent } from './users/addUser.component';
 
 
@@ -52,10 +54,8 @@ import { NgbPaginationModule, NgbAlertModule } from '@ng-bootstrap/ng-bootstrap'
     EditUserModalContent,
     AddUserModalContent,
     TutorUserComponent,
-    ToggleButtonComponent
-
-
-
+    ToggleButtonComponent,
+    DeleteUserModalContent
   ],
   imports: [
     BrowserModule,
@@ -79,7 +79,8 @@ import { NgbPaginationModule, NgbAlertModule } from '@ng-bootstrap/ng-bootstrap'
   ],
   entryComponents: [
     EditUserModalContent,
-    AddUserModalContent
+    AddUserModalContent,
+    DeleteUserModalContent
   ],
   providers: [],
   bootstrap: [

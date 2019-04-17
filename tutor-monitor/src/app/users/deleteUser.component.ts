@@ -1,19 +1,18 @@
 import { Component, Input } from '@angular/core';
-import { NgbActiveModal, NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
+import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { AngularFirestore,AngularFirestoreCollection, AngularFirestoreDocument } from '@angular/fire/firestore';
-import {FormsModule} from '@angular/forms';
-import * as _ from 'lodash';  
+import { AngularFireDatabase } from '@angular/fire/database';
+import {FormsModule} from '@angular/forms'
 
 @Component({
     selector: 'ngbd-modal-content',
-    templateUrl: 'editUser.html',
+    templateUrl: 'deleteUser.html',
   })
 
-export class EditUserModalContent {
+export class DeleteUserModalContent {
     @Input() user;
     userRef: any;
     db : any;
-    newUser: any = {}
     
     
     // usersRef: AngularFirestoreCollection;
@@ -28,17 +27,14 @@ export class EditUserModalContent {
         }
 
     ngOnInit() {
-        this.newUser = _.cloneDeep(this.user);   
+        
     }
 
-
-    update(user){
-        this.userDoc = this.db.doc('users/' + user.id).update(user).then((data)=>{
+    delete(){
+        this.userDoc = this.db.doc('users/' + this.user.id).delete().then((data)=>{
                 this.activeModal.close('Saved')
         })
     }
-
-    
 
 }
   
