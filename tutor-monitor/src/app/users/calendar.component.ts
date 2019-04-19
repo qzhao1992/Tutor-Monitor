@@ -3,6 +3,12 @@ import {startOfDay, endOfDay, subDays, addDays, endOfMonth, isSameDay, isSameMon
 import { Subject } from 'rxjs';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import {CalendarEvent, CalendarEventAction, CalendarEventTimesChangedEvent, CalendarView} from 'angular-calendar';
+import { AngularFirestore } from '@angular/fire/firestore';
+import { map } from 'rxjs/operators';
+import * as _ from 'lodash';  
+import * as moment from 'moment';
+
+
 
 const colors: any = {
     red: {
@@ -26,13 +32,16 @@ const colors: any = {
     templateUrl: 'calendar.html'
 })
 export class CalendarComponent {
+    
     @ViewChild('modalContent') modalContent: TemplateRef<any>;
 
     view: CalendarView = CalendarView.Month;
-
     CalendarView = CalendarView;
-
     viewDate: Date = new Date();
+    
+    
+    users: any = [];
+    db : any;
 
     modalData: {
         action: string;
@@ -57,50 +66,47 @@ export class CalendarComponent {
 
     refresh: Subject<any> = new Subject();
 
-    events: CalendarEvent[] = [
-        {
-            start: subDays(startOfDay(new Date()), 1),
-            end: addDays(new Date(), 1),
-            title: 'A 3 day event',
-            color: colors.red,
-            actions: this.actions,
-            allDay: true,
-            resizable: {
-                beforeStart: true,
-                afterEnd: true
-            },
-            draggable: true
-        },
-        {
-            start: startOfDay(new Date()),
-            title: 'An event with no end date',
-            color: colors.yellow,
-            actions: this.actions
-        },
-        {
-            start: subDays(endOfMonth(new Date()), 3),
-            end: addDays(endOfMonth(new Date()), 3),
-            title: 'A long event that spans 2 months',
-            color: colors.blue,
-            allDay: true
-        },
-        {
-            start: addHours(startOfDay(new Date()), 2),
-            end: new Date(),
-            title: 'A draggable and resizable event',
-            color: colors.yellow,
-            actions: this.actions,
-            resizable: {
-                beforeStart: true,
-                afterEnd: true
-            },
-            draggable: true
-        }
-    ];
+    events: CalendarEvent[] = []
 
     activeDayIsOpen: boolean = true;
 
-    constructor(private modal: NgbModal) { }
+    constructor(
+        private modal: NgbModal,
+        firebase: AngularFirestore
+        ) { 
+        this.db = firebase;
+        this.users = this.db.collection('users').snapshotChanges().pipe(map((users:any) => users.map(a =>{
+            let data = a.payload.doc.data();
+            data["id"] =a.payload.doc.id;
+            return data;
+        }))).subscribe((users) =>{
+
+            this.users = users;
+            console.log("users: ",this.users )
+            this.setEvent(this.users)
+        });
+    }
+
+    setEvent(users){
+        console.log(typeof new Date());
+        for(let i = 0; i < users.length; i++){
+            if(users[i].startSchedule){
+                console.log("??: ", moment(users[i].startSchedule.seconds *1000).format())
+                this.events.push({
+                    start : startOfDay(moment(users[i].startSchedule.seconds * 1000).format()),
+                    end : endOfDay(users[i].endSchedule.seconds * 1000),
+                    title : users[i].firstName,
+                    resizable: {
+                        beforeStart: true,
+                        afterEnd: true
+                      },
+                    // allDay : true,
+                    draggable: true,
+                })
+            }
+        }
+        console.log("this.events: ", this.events)
+    }
 
     dayClicked({ date, events }: { date: Date; events: CalendarEvent[] }): void {
         if (isSameMonth(date, this.viewDate)) {
