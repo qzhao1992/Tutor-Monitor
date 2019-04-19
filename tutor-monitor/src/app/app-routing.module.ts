@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { UsersComponent } from './users/users.component';
+import { StudentsComponent } from './students/students.component';
 // import { CalendarComponent } from './users/calendar.component';
 import { CalendarComponent } from './users/calendar.component';
 import { SignInComponent } from './components/sign-in/sign-in.component';
@@ -13,6 +14,7 @@ import { SecureInnerPagesGuard } from "./shared/gaurd/secure-inner-pages.gaurd";
 
 const routes: Routes = [
   { path: 'users', component: UsersComponent },
+  { path: 'students', component: StudentsComponent },
   { path: 'calendar', component: CalendarComponent },
   { path: '', redirectTo: '/users', pathMatch: 'full' },
   { path: 'sign-in', component: SignInComponent, canActivate: [SecureInnerPagesGuard] },
