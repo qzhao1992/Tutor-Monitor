@@ -17,22 +17,19 @@ export class EditUserModalContent {
     db : any;
     newUser: any = {}
     
-    
     // usersRef: AngularFirestoreCollection;
     private userDoc: AngularFirestoreDocument;
 
     constructor(
         public activeModal: NgbActiveModal,
         firebase: AngularFirestore
-        ) {
-            
+        ) {            
             this.db = firebase;
         }
 
     ngOnInit() {
         this.newUser = _.cloneDeep(this.user);   
     }
-
 
     update(user){
         this.userDoc = this.db.doc('users/' + user.id).update(user).then((data)=>{
@@ -52,8 +49,5 @@ export class EditUserModalContent {
         this.isAddStart = false;
         this.isAddEnd = false;
     }
-
-    
-
 }
   

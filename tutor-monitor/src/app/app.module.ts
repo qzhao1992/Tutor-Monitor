@@ -11,6 +11,7 @@ import { DlDateTimeDateModule, DlDateTimePickerModule } from 'angular-bootstrap-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { UsersComponent } from './users/users.component';
+import { StudentsComponent } from './students/students.component';
 // import { CalendarComponent } from './users/calendar.component';
 import { CalendarComponent } from './users/calendar.component';
 import { AuthService } from "./shared/services/auth.service";
@@ -46,6 +47,7 @@ import { NgbPaginationModule, NgbAlertModule } from '@ng-bootstrap/ng-bootstrap'
   declarations: [
     AppComponent,
     UsersComponent,
+    StudentsComponent,
     CalendarComponent,
     SignInComponent,
     SignUpComponent,
