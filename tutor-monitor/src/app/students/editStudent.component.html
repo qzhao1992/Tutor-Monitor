@@ -1,0 +1,49 @@
+<div class="modal-header">
+        <h4 class="modal-title">Edit Item</h4>
+        <button type="button" class="close" (click)="activeModal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <form>
+            <div class="form-group">
+                <label for="firstName">First Name</label>
+                <input class="form-control" name="firstName" id="firstName" [(ngModel)]="newUser.firstName" disabled>
+            </div>
+            <div class="form-group">
+                <label for="lastName">Last Name</label>
+                <input class="form-control" name="lastName" id="lastName" [(ngModel)]="newUser.lastName" disabled>
+            </div>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input class="form-control" type="email" name="email" id="email" [(ngModel)]="newUser.email" disabled>
+            </div>
+            <div class="form-group">
+                Schedule Start: {{newUser.startSchedule}} <br>
+                Schedule end: {{newUser.endSchedule}} <br>
+                <button type="button" class="btn btn-outline-dark" (click)="addStartSchedule()" ngbAutofocus>Add Start Time</button>
+                <button type="button" class="btn btn-outline-dark" (click)="addEndSchedule()" ngbAutofocus>Add End Time</button>
+    
+                <div *ngIf="isAddStart || isAddEnd" class="card">
+                    
+                    <div *ngIf="isAddStart">
+                        <dl-date-time-picker name="startDate" startView="day" maxView="month" minView="minute" [(ngModel)]="newUser.startSchedule">
+                        </dl-date-time-picker>
+                    </div>
+    
+                    <div *ngIf="isAddEnd">
+                        <dl-date-time-picker name="startDate" startView="day" maxView="month" minView="minute" [(ngModel)]="newUser.endSchedule">
+                        </dl-date-time-picker>
+                    </div>
+    
+                    <button type="button" class="btn btn-outline-dark" (click)="finishedAddSchedule()" ngbAutofocus>Add</button> 
+                </div>
+                
+            </div>
+            
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-outline-dark" (click)="update(newUser)" ngbAutofocus>Save</button>
+        <button type="button" class="btn btn-outline-dark" (click)="activeModal.close('Close click')">Close</button>
+    </div>
