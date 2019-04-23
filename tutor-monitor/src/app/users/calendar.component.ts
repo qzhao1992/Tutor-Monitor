@@ -1,12 +1,16 @@
 import {Component, ChangeDetectionStrategy, ViewChild, TemplateRef} from '@angular/core';
-import {startOfDay, endOfDay, subDays, addDays, endOfMonth, isSameDay, isSameMonth, addHours} from 'date-fns';
+import {startOfDay, endOfDay, subDays, addDays, endOfMonth, isSameDay, isSameMonth, addHours, endOfHour, startOfHour} from 'date-fns';
 import { Subject } from 'rxjs';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import {CalendarEvent, CalendarEventAction, CalendarEventTimesChangedEvent, CalendarView} from 'angular-calendar';
+import {CalendarEvent, CalendarEventAction, CalendarEventTimesChangedEvent, 
+    CalendarView, CalendarDayViewBeforeRenderEvent,
+    CalendarMonthViewBeforeRenderEvent,
+    CalendarWeekViewBeforeRenderEvent} from 'angular-calendar';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { map } from 'rxjs/operators';
 import * as _ from 'lodash';  
 import * as moment from 'moment';
+import RRule from 'rrule';
 
 
 
@@ -24,6 +28,18 @@ const colors: any = {
         secondary: '#FDF1BA'
     }
 };
+
+interface RecurringEvent {
+    title: string;
+    color: any;
+    rrule?: {
+      freq: any;
+      bymonth?: number;
+      bymonthday?: number;
+      byweekday?: any;
+    };
+  }
+  
 
 @Component({
     selector: 'mwl-demo-component',
@@ -92,19 +108,22 @@ export class CalendarComponent {
         for(let i = 0; i < users.length; i++){
             if(users[i].startSchedule){
                 console.log("??: ", moment(users[i].startSchedule.seconds *1000).format())
+                console.log("??: ", moment(users[i].endSchedule.seconds *1000).format())
                 this.events.push({
-                    start : startOfDay(moment(users[i].startSchedule.seconds * 1000).format()),
-                    end : endOfDay(users[i].endSchedule.seconds * 1000),
-                    title : users[i].firstName,
+                    start : startOfHour(moment(users[i].startSchedule.seconds * 1000).format()),
+                    end : endOfHour(moment(users[i].endSchedule.seconds * 1000).format()),
+                    // dtstart: moment(users[i].startSchedule.seconds * 1000).startOf('day').toDate(),
+                    title : users[i].role == "student" ? "Appointment by " + users[i].firstName : users[i].firstName,
                     resizable: {
                         beforeStart: true,
                         afterEnd: true
-                      },
-                    // allDay : true,
-                    draggable: true,
+                    },
+                    allDay : false,
+                    // draggable: true,
                 })
             }
         }
+        this.refresh.next();
         console.log("this.events: ", this.events)
     }
 

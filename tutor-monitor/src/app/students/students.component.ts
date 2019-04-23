@@ -7,6 +7,11 @@ import { Directive, EventEmitter, Input, Output, QueryList, ViewChildren } from 
 import { NgbModal, ModalDismissReasons, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { AngularFireDatabase } from '@angular/fire/database';
 import { map } from 'rxjs/operators';
+import { AuthService } from '../shared/services/auth.service';
+import * as moment from 'moment';
+
+import { EditStudentModalContent } from './editStudent.component';
+
 
 //modal
 
@@ -18,14 +23,18 @@ export class StudentsComponent {
   users: any = [];
   closeResult: string;
   db : any;
+  user: any = {};
 
   constructor(
     firebase: AngularFirestore,
+    private service: AuthService,
 
     private modalService: NgbModal
   ) {
     this.db = firebase;
-    this.users = this.db.collection('users').snapshotChanges().pipe(map((users:any) => users.map(a =>{
+    this.user = JSON.parse(localStorage.getItem('user'))
+    console.log("service ", this.user.email);
+    this.users = this.db.collection('users', ref => ref.where('email', '==', this.user.email)).snapshotChanges().pipe(map((users:any) => users.map(a =>{
       let data = a.payload.doc.data();
       data["id"] =a.payload.doc.id;
       return data;
@@ -37,6 +46,16 @@ export class StudentsComponent {
       this.users = users;
     });
   }
+
+  getDAteFormat(timestamp){
+    return moment(timestamp).format("MM-DD-YYYY, h:mm:ss a")
+  }
+
+  openEdit(user) {
+    const modalRef = this.modalService.open(EditStudentModalContent);
+    modalRef.componentInstance.user = user;
+  }
+
 
 }
 

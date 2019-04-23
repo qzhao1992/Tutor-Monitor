@@ -21,6 +21,8 @@ import { AuthComponent } from './auth/auth.component';
 import { EditUserModalContent } from './users/editUser.component';
 import { DeleteUserModalContent } from './users/deleteUser.component';
 import { AddUserModalContent } from './users/addUser.component';
+import { EditStudentModalContent } from './students/editStudent.component';
+
 
 
 
@@ -57,6 +59,7 @@ import { NgbPaginationModule, NgbAlertModule } from '@ng-bootstrap/ng-bootstrap'
     AuthComponent,
     EditUserModalContent,
     AddUserModalContent,
+    EditStudentModalContent,
     TutorUserComponent,
     ToggleButtonComponent,
     DeleteUserModalContent
@@ -86,9 +89,12 @@ import { NgbPaginationModule, NgbAlertModule } from '@ng-bootstrap/ng-bootstrap'
   entryComponents: [
     EditUserModalContent,
     AddUserModalContent,
+    EditStudentModalContent,
     DeleteUserModalContent
   ],
-  providers: [],
+  providers: [
+    AuthService
+  ],
   bootstrap: [
     AppComponent,
 
