@@ -11,6 +11,15 @@
             <h3>Sign Up</h3>
 
             <div class="formGroup">
+                <input type="text" class="formControl" placeholder="First Name" #userFirstName required>
+            </div>
+            <div class="formGroup">
+                <input type="text" class="formControl" placeholder="Last Name" #userLastName required>
+            </div>
+            <div class="formGroup">
+                <input type="text" class="formControl" placeholder="Student/ Tutor" #userRole required>
+            </div>
+            <div class="formGroup">
                 <input type="email" class="formControl" placeholder="Email Address" #userEmail required>
             </div>
 
@@ -19,20 +28,20 @@
             </div>
 
             <div class="formGroup">
-                <input type="button" class="btn btnPrimary" value="Sign Up" (click)="authService.SignUp(userEmail.value, userPwd.value)">
+                <input type="button" class="btn btnPrimary" value="Sign Up" (click)="authService.SignUp(userEmail.value, userPwd.value, userFirstName.value, userLastName.value, userRole.value)">
             </div>
 
-            <div class="formGroup">
+            <!-- <div class="formGroup">
                 <span class="or"><span class="orInner">Or</span></span>
-            </div>
+            </div> -->
 
             <!-- Continue with Google -->
-            <div class="formGroup">
+            <!-- <div class="formGroup">
                 <button type="button" class="btn googleBtn" (click)="authService.GoogleAuth()">
                     <i class="fab fa-google-plus-g"></i>
                     Continue with Google
                 </button>
-            </div>
+            </div> -->
 
         </div>
 

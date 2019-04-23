@@ -1,5 +1,5 @@
 import {Component, ChangeDetectionStrategy, ViewChild, TemplateRef} from '@angular/core';
-import {startOfDay, endOfDay, subDays, addDays, endOfMonth, isSameDay, isSameMonth, addHours} from 'date-fns';
+import {startOfDay, endOfDay, subDays, addDays, endOfMonth, isSameDay, isSameMonth, addHours, endOfHour, startOfHour} from 'date-fns';
 import { Subject } from 'rxjs';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import {CalendarEvent, CalendarEventAction, CalendarEventTimesChangedEvent, 
@@ -108,11 +108,12 @@ export class CalendarComponent {
         for(let i = 0; i < users.length; i++){
             if(users[i].startSchedule){
                 console.log("??: ", moment(users[i].startSchedule.seconds *1000).format())
+                console.log("??: ", moment(users[i].endSchedule.seconds *1000).format())
                 this.events.push({
-                    start : startOfDay(moment(users[i].startSchedule.seconds * 1000).format()),
-                    end : endOfDay(users[i].endSchedule.seconds * 1000),
+                    start : startOfHour(moment(users[i].startSchedule.seconds * 1000).format()),
+                    end : endOfHour(moment(users[i].endSchedule.seconds * 1000).format()),
                     // dtstart: moment(users[i].startSchedule.seconds * 1000).startOf('day').toDate(),
-                    title : users[i].firstName,
+                    title : users[i].role == "student" ? "Appointment by " + users[i].firstName : users[i].firstName,
                     resizable: {
                         beforeStart: true,
                         afterEnd: true
