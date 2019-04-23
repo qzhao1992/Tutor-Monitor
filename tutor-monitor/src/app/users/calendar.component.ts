@@ -2,11 +2,15 @@ import {Component, ChangeDetectionStrategy, ViewChild, TemplateRef} from '@angul
 import {startOfDay, endOfDay, subDays, addDays, endOfMonth, isSameDay, isSameMonth, addHours} from 'date-fns';
 import { Subject } from 'rxjs';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import {CalendarEvent, CalendarEventAction, CalendarEventTimesChangedEvent, CalendarView} from 'angular-calendar';
+import {CalendarEvent, CalendarEventAction, CalendarEventTimesChangedEvent, 
+    CalendarView, CalendarDayViewBeforeRenderEvent,
+    CalendarMonthViewBeforeRenderEvent,
+    CalendarWeekViewBeforeRenderEvent} from 'angular-calendar';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { map } from 'rxjs/operators';
 import * as _ from 'lodash';  
 import * as moment from 'moment';
+import RRule from 'rrule';
 
 
 
@@ -24,6 +28,18 @@ const colors: any = {
         secondary: '#FDF1BA'
     }
 };
+
+interface RecurringEvent {
+    title: string;
+    color: any;
+    rrule?: {
+      freq: any;
+      bymonth?: number;
+      bymonthday?: number;
+      byweekday?: any;
+    };
+  }
+  
 
 @Component({
     selector: 'mwl-demo-component',
@@ -95,16 +111,18 @@ export class CalendarComponent {
                 this.events.push({
                     start : startOfDay(moment(users[i].startSchedule.seconds * 1000).format()),
                     end : endOfDay(users[i].endSchedule.seconds * 1000),
+                    // dtstart: moment(users[i].startSchedule.seconds * 1000).startOf('day').toDate(),
                     title : users[i].firstName,
                     resizable: {
                         beforeStart: true,
                         afterEnd: true
-                      },
-                    // allDay : true,
-                    draggable: true,
+                    },
+                    allDay : false,
+                    // draggable: true,
                 })
             }
         }
+        this.refresh.next();
         console.log("this.events: ", this.events)
     }
 
