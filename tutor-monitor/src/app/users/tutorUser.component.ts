@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 
 @Component({
-    selector: 'app-root',
-    template: `
+  selector: 'app-root',
+  template: `
     <main>
     <head>tutor </head>
 
@@ -15,7 +15,7 @@ import { Component } from '@angular/core';
     
     </main>
   `,
-    styles: [`
+  styles: [`
     h1 {
       color: #DB5B33;
       font-weight: 300;
@@ -33,5 +33,5 @@ import { Component } from '@angular/core';
   `]
 })
 export class TutorUserComponent {
-    checked: boolean;
+  checked: boolean;
 }

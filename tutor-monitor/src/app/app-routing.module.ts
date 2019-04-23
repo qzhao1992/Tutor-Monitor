@@ -13,11 +13,12 @@ import { AuthGuard } from "./shared/gaurd/auth.gaurd";
 import { SecureInnerPagesGuard } from "./shared/gaurd/secure-inner-pages.gaurd";
 import { AdminGuard } from "./shared/gaurd/admin.gaurd";
 import { TutorUserComponent } from './users/tutorUser.component';
+import { StudentGuard } from './shared/gaurd/student.gaurd';
 
 
 
 const routes: Routes = [
-  { path: 'users', component: UsersComponent },
+  { path: 'users', component: UsersComponent, canActivate: [AdminGuard] },
   { path: 'students', component: StudentsComponent },
   { path: 'calendar', component: CalendarComponent },
   { path: '', redirectTo: '/sign-in', pathMatch: 'full' },
@@ -27,6 +28,7 @@ const routes: Routes = [
   { path: 'forgot-password', component: ForgotPasswordComponent, canActivate: [SecureInnerPagesGuard] },
   { path: 'verify-email-address', component: VerifyEmailComponent, canActivate: [SecureInnerPagesGuard] },
   { path: 'tutorpage', component: TutorUserComponent, canActivate: [AdminGuard] },
+  { path: 'students-component', component: StudentsComponent, canActivate: [StudentGuard] }
 
 ];
 

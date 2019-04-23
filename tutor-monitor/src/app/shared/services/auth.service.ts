@@ -4,6 +4,7 @@ import { auth } from 'firebase/app';
 import { AngularFireAuth } from "@angular/fire/auth";
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
 import { Router } from "@angular/router";
+import { StudentsComponent } from 'src/app/students/students.component';
 
 @Injectable({
     providedIn: 'root'
@@ -93,6 +94,7 @@ export class AuthService {
     GoogleAuth() {
         return this.AuthLogin(new auth.GoogleAuthProvider());
     }
+
 
     // Auth logic to run auth providers
     AuthLogin(provider) {
