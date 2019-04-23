@@ -20,10 +20,14 @@ export class StudentGuard implements CanActivate {
     canActivate(
         next: ActivatedRouteSnapshot,
         state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
-        if (this.authService.isLoggedIn !== true) {
-            window.alert("Login please!");
-            this.router.navigate(['dashboard'])
+        if (this.authService.isLoggedIn !== false) {
 
+            this.router.navigate(['students-component'])
+
+        }
+        if (this.authService.isLoggedIn) {
+            window.alert("You are not allowed to access this URL!");
+            this.router.navigate(['dashboard'])
         }
 
         return true
